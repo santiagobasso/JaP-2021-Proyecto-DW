@@ -44,6 +44,9 @@ var getJSONData = function(url){
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
 document.addEventListener("DOMContentLoaded", function(e){
+  if(document.getElementById("navigationBar")){
+    navbar();
+  }
   document.getElementById("logout").addEventListener('click',function(){
     location.href="logout.html";
   });
@@ -62,6 +65,47 @@ function onSignIn(googleUser) {
   // The ID token you need to pass to your backend:
   /*var id_token = googleUser.getAuthResponse().id_token;
   console.log("ID Token: " + id_token);*/
-  localStorage.setItem('user',JSON.stringify(profile.getName()));
+  let usuario = {};
+  usuario.nombre = profile.getGivenName();
+  localStorage.setItem('user',JSON.stringify(usuario));
   location.href="index.html";
+}
+
+function navbar(){
+  let user = JSON.parse(localStorage.getItem("user"));
+  let htmlContentToAppend = `
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#nav_bar" aria-controls="nav_bar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="nav_bar">
+      <a class="navbar-brand" href="/index.html">E-Mercado</a>
+      <ul class="navbar-nav mr-auto mt-2 mt-lg-0" style="padding-left: 25%;">
+        <li class="nav-item" style="padding-left: 3%;">
+          <a class="nav-link" href="/index.html">Inicio</a>
+        </li>
+        <li class="nav-item" style="padding-left: 3%;">
+          <a class="nav-link" href="/categories.html">Categorias</a>
+        </li>
+        <li class="nav-item" style="padding-left: 3%;">
+          <a class="nav-link" href="/products.html">Productos</a>
+        </li>
+        <li class="nav-item" style="padding-left: 3%;">
+          <a class="nav-link" href="/sell.html">Vender</a>
+        </li>
+        <li class="nav-item" style="padding-left: 3%;">
+          <a class="nav-link" href="/cart.html">Mi_carrito</a>
+        </li>
+        <li class="dropdown" id="dropdownUser" style="list-style:none;float:right; padding-left: 3%;">
+          <button id="UserDropdown" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          ${user.nombre}
+          </button>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item" id="logout" href="logout.html">Cerrar sesión</a>
+            </ul>
+        </li>
+      </ul>
+    </div>
+  </nav>`
+document.getElementById("navigationBar").innerHTML = htmlContentToAppend;
 }

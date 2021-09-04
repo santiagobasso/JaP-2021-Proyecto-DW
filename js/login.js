@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function(e){
 
 function log(){
     let usuario = {};
-    usuario.correo = document.getElementById("email").value.trim();
+    usuario.nombre = document.getElementById("email").value.trim();
     usuario.pwd = document.getElementById("pass").value.trim();
     if(usuario.pwd=="" || usuario.correo==""){
         if(usuario.correo==""){
