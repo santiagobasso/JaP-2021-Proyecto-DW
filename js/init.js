@@ -79,22 +79,22 @@ function navbar(){
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="nav_bar">
-      <a class="navbar-brand" href="/index.html">E-Mercado</a>
+      <a class="navbar-brand" href="index.html">E-Mercado</a>
       <ul class="navbar-nav mr-auto mt-2 mt-lg-0" style="padding-left: 25%;">
         <li class="nav-item" style="padding-left: 3%;">
-          <a class="nav-link" href="/index.html">Inicio</a>
+          <a class="nav-link" href="index.html">Inicio</a>
         </li>
         <li class="nav-item" style="padding-left: 3%;">
-          <a class="nav-link" href="/categories.html">Categorias</a>
+          <a class="nav-link" href="categories.html">Categorias</a>
         </li>
         <li class="nav-item" style="padding-left: 3%;">
-          <a class="nav-link" href="/products.html">Productos</a>
+          <a class="nav-link" href="products.html">Productos</a>
         </li>
         <li class="nav-item" style="padding-left: 3%;">
-          <a class="nav-link" href="/sell.html">Vender</a>
+          <a class="nav-link" href="sell.html">Vender</a>
         </li>
         <li class="nav-item" style="padding-left: 3%;">
-          <a class="nav-link" href="/cart.html">Mi_carrito</a>
+          <a class="nav-link" href="cart.html">Mi_carrito</a>
         </li>
         <li class="dropdown" id="dropdownUser" style="list-style:none;float:right; padding-left: 3%;">
           <button id="UserDropdown" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
