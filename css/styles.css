@@ -221,3 +221,26 @@ a.custom-card:hover {
   width: 100%;
   top: 173px;
 }
+
+/* STARS STYLE */
+
+.rating{
+  direction: rtl;
+  display: inline-block;
+}
+
+.rating input[type=radio]{
+  display: none;
+}
+
+.rating label {
+  cursor: pointer;
+}
+
+.rating label:hover,
+.rating label:hover~label,
+.rating input[type=radio]:checked~label {
+  color:orange;
+}
+
+
