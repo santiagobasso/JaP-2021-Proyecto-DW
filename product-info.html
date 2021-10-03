@@ -24,25 +24,38 @@
       <h2>Descripción de el producto</h2>
       <p class="lead">Encontrarás aquí toda la información de el producto seleccionado.</p>
     </div>
+
     <div class="row">
       <div class="col-8">
-        <h3 id="productName"></h3>
+        <div class="d-flex justify-content-between">
+          <h3 id="productName" style="margin: 0ch;"></h3>
+          <p class="text-muted" id="productSoldCount" style="margin: 0ch;"></p>
+        
+        </div>
+        
         <hr class="my-3">
+        <div id="carouselIndicators" class="carousel slide" data-ride="carousel">
+          <ol class="carousel-indicators" id="productImagesIndicator">
+          </ol>
+          <div class="carousel-inner" id="productImages">
+          </div>
+          <a class="carousel-control-prev" href="#carouselIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#carouselIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
+        <br>
         <dl>
           <dt>Descripción</dt>
           <dd>
             <p id="productDescription"></p>
           </dd>
-
-          <dt>Cantidad vendidos</dt>
-          <dd>
-            <p id="productSoldCount"></p>
-          </dd>
-          <dt>Imágenes ilustrativas del producto</dt>
-          <dd>
-            <div class="row text-center text-lg-left pt-2" id="productImages">
-            </div>
-          </dd>
+          <div class="d-flex justify-content-between" id="related-products">
+          </div>
         </dl>
       </div>
       <div class="col-4">
@@ -50,52 +63,54 @@
         <hr class="my-3">
         <div id="comments-container" style="overflow-y: scroll; height: 36em;">
         </div>
-        <div  id="comment-container" style="display:none"></div>
+        <div id="comment-container" style="display:none"></div>
         <hr>
         <div style="padding-left: 20px;padding-right: 20px;">
-            <h3>Comenta tu experiencia</h3>
-            <div class="col-12 d-flex justify-content-between">
-              <div id="rating">
-                <fieldset class="rating" style="float:left">
-                  <input type="radio" id="5" name="rating" /><label class="fa fa-star" for="5"></label>
-                  <input type="radio" id="4" name="rating" /><label class="fa fa-star" for="4"></label>
-                  <input type="radio" id="3" name="rating" /><label class="fa fa-star" for="3"></label>
-                  <input type="radio" id="2" name="rating" /><label class="fa fa-star" for="2"></label>
-                  <input type="radio" id="1" name="rating" /><label class="fa fa-star" for="1"></label>
-                  Califica 
-                </fieldset>
-              </div>
+          <h3>Comenta tu experiencia</h3>
+          <div class="col-12 d-flex justify-content-between">
+            <div id="rating">
+              <fieldset class="rating" style="float:left">
+                <input type="radio" id="5" name="rating" /><label class="fa fa-star" for="5"></label>
+                <input type="radio" id="4" name="rating" /><label class="fa fa-star" for="4"></label>
+                <input type="radio" id="3" name="rating" /><label class="fa fa-star" for="3"></label>
+                <input type="radio" id="2" name="rating" /><label class="fa fa-star" for="2"></label>
+                <input type="radio" id="1" name="rating" /><label class="fa fa-star" for="1"></label>
+                Califica
+              </fieldset>
             </div>
-            <textarea type="text" id="message" class="form-control" placeholder="Comentanos que te parece este producto."></textarea>
-            <br>
-            <div><button class="btn btn-lg btn-dark btn-block" id="comment">Comentar</button></div> 
+          </div>
+          <textarea type="text" id="message" class="form-control"
+            placeholder="Comentanos que te parece este producto."></textarea>
+          <br>
+          <div><button class="btn btn-lg btn-dark btn-block" id="comment">Comentar</button></div>
 
         </div>
         <br>
       </div>
-        <a type="button" class="btn btn-light btn-lg btn-block" href="products.html">Ver productos</a>
+      <a type="button" class="btn btn-light btn-lg btn-block" href="products.html">Ver productos</a>
+    </div>
+    <footer class="text-muted">
+      <div class="container">
+        <p class="float-right">
+          <a href="#">Volver arriba</a>
+        </p>
+        <p>Este sitio forma parte de Desarrollo Web - JAP - 2020</p>
+        <p>Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la letra del obligatorio.</p>
       </div>
-      <footer class="text-muted">
-        <div class="container">
-          <p class="float-right">
-            <a href="#">Volver arriba</a>
-          </p>
-          <p>Este sitio forma parte de Desarrollo Web - JAP - 2020</p>
-          <p>Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la letra del obligatorio.</p>
-        </div>
-      </footer>
-      <div id="spinner-wrapper">
-        <div class="lds-ring">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
+    </footer>
+
+    <div id="spinner-wrapper">
+      <div class="lds-ring">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
       </div>
-      <script src="js/jquery-3.4.1.min.js"></script>
-      <script src="js/bootstrap.bundle.min.js"></script>
-      <script src="js/init.js"></script>
-      <script src="js/product-info.js"></script>
+    </div>
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/init.js"></script>
+    <script src="js/product-info.js"></script>
 </body>
 
 </html>
