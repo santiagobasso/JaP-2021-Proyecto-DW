@@ -31,32 +31,82 @@
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
   <link href="css/dropzone.css" rel="stylesheet">
+  <link href="css/font-awesome.min.css" rel="stylesheet">
 </head>
 
 <body>
   <div id="navigationBar">
   </div>
-  <div class="container p-5">
-    <div class="alert alert-danger" role="alert" style="position: relative; width:auto; top: 0;">
-      <h4 class="alert-heading">¡A trabajar! :)</h4>
-      <p>Esta sección corresponde a: Entrega 5 (Fecha de entrega: 17/10/2021) y Entrega 7 (Fecha de entrega: 14/11/2021).</p>
-      <hr>
-      <p class="mb-0">Para saber qué debes hacer, fijate en la actividad en CREA correspondiente a esta entrega.</p>
+  <div class="row justify-content-md-center">
+    <div class="col-md-8 order-md-1">
+      <div id="product-container">
+      </div>
+      <hr class="mb-4">
+      <h5 class="mb-3">Tipo de envio</h5>
+      <div class="d-block my-3" onchange="showCart(cart)">
+        <div class="custom-control custom-radio">
+          <input id="deliveryEstandar" name="deliveryType" type="radio" class="custom-control-input" checked="" required="">
+          <label class="custom-control-label" for="deliveryEstandar">5% Estándar (12-15 dias)</label>
+        </div>
+        <div class="custom-control custom-radio">
+          <input id="deliveryExpress" name="deliveryType" type="radio" class="custom-control-input" required="">
+          <label class="custom-control-label" for="deliveryExpress">7% Express (5-8 Dias)</label>
+        </div>
+        <div class="custom-control custom-radio">
+          <input id="deliveryPremium" name="deliveryType" type="radio" class="custom-control-input" required="">
+          <label class="custom-control-label" for="deliveryPremium">15% Premium (2-5 Dias)</label>
+        </div>
+      </div>
+      <hr class="mb-4">
+      <h5 class="mb-3">Moneda</h5>
+      <div class="d-block my-3" onchange="showCart(cart)">
+        <div class="custom-control custom-radio">
+          <input id="currencyUYU" name="currency" type="radio" class="custom-control-input" checked="" required="">
+          <label class="custom-control-label" for="currencyUYU">Peso Uruguayo (UYU)</label>
+        </div>
+        <div class="custom-control custom-radio">
+          <input id="currencyUSD" name="currency" type="radio" class="custom-control-input" required="">
+          <label class="custom-control-label" for="currencyUSD">Dolar (USD)</label>
+        </div>
+      </div>
+      <hr class="mb-4">
+      <h4 class="mb-3">Costos</h4>
+      <ul class="list-group mb-3">
+        <li class="list-group-item d-flex justify-content-between lh-condensed">
+          <div>
+            <h6 class="my-0">Subtotal</h6>
+            <small class="text-muted">Con los precios en la moneda seleccionada</small>
+          </div>
+          <span class="text-muted" id="subtotalCost"></span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between lh-condensed">
+          <div>
+            <h6 class="my-0">Envio</h6>
+            <small class="text-muted">Según el tipo seleccionado</small>
+          </div>
+          <span class="text-muted" id="deliveryCost"></span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between">
+          <h5 id="totalCostText">Total</h5>
+          <strong id="totalCost"></strong>
+        </li>
+      </ul>
+      <button type="submit" id="confirmPayment" class="btn btn-success col-12" style="margin-bottom: 40px;"> Confirmar pedido</button>
     </div>
-  </div>
-  <div id="spinner-wrapper">
-    <div class="lds-ring">
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
+    <div id="spinner-wrapper">
+      <div class="lds-ring">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
     </div>
-  </div>
-  <script src="js/jquery-3.4.1.min.js"></script>
-  <script src="js/bootstrap.bundle.min.js"></script>
-  <script src="js/dropzone.js"></script>
-  <script src="js/init.js"></script>
-  <script src="js/cart.js"></script>
+
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/dropzone.js"></script>
+    <script src="js/init.js"></script>
+    <script src="js/cart.js"></script>
 </body>
 
 </html>

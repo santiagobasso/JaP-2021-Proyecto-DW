@@ -76,7 +76,7 @@ function showProductsList() {
                                  </div>
                                 <p class="mb-1"> ${product.description} </p>
                                  <br>
-                                <p> <b>Precio:</b> <span style="font-family: serif">${price}</span>  ${product.currency}</p>
+                                <p> <b>Precio:</b> <span style="font-family: Arial">${price}</span>  ${product.currency}</p>
                             </div>
                         </div>
                     </div>

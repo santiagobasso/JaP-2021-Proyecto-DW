@@ -13,14 +13,14 @@ function showImagesGallery(array) {
     if (i == 0) {
       htmlContentToAppendImages += `
         <div class="carousel-item active">
-            <img src="${imageSrc}" class="d-block w-100" alt="...">
+            <img src="${imageSrc}" class="d-block w-100" alt="${imageSrc}">
         </div>
         `;
       htmlContentToAppendIndicators += `<li data-target="#carouselIndicators" data-slide-to="${i}" class="active"></li>`;
     } else {
       htmlContentToAppendImages += `
             <div class="carousel-item">
-                <img src="${imageSrc}" class="d-block w-100" alt="...">
+                <img src="${imageSrc}" class="d-block w-100" alt="${imageSrc}">
             </div>
             `;
       htmlContentToAppendIndicators += `<li data-target="#carouselIndicators" data-slide-to="${i}"></li>`;
@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
 
       productName.innerHTML =
         product.name +
-        `<span style="font-family:'Times New Roman', Times, serif; font-size: 28px"> - ${price}</span>  ${product.currency}`;
+        `<span style="font-family:'Arial', Times, serif; font-size: 28px"> - ${price}</span>  ${product.currency}`;
       productDescription.innerHTML = product.description;
       productSoldCount.innerHTML = product.soldCount + ` ya fueron vendidos`;
 
@@ -115,7 +115,7 @@ function showComments() {
     htmlContentToAppend += `
         <div class="list-group-item list-group-item-action">
                         <h7 class="ml-2"> <b>${comment.user}</b></h7>     
-                        <small class="text-muted ml-2 fas fa-clock"> ${commentdate.getDate()}/${commentdate.getMonth() + 1
+                        <small class="text-muted ml-2 fas fa-clock" > ${commentdate.getDate()}/${commentdate.getMonth() + 1
       }/${commentdate.getFullYear()}</small>              
                         <hr class="my-3">
                         <div class="col-12">
@@ -166,7 +166,7 @@ function showRelatedProducts() {
                 <div class="card-body">
                   <h5 class="card-title">${productsArray[id].name}</h5>
                   <p class="card-text" style="height: 80px;">${productsArray[id].description}</p>  
-                  <a href="product-info.html" class="btn btn-primary">Por <span style="font-family:'Times New Roman', Times, serif; font-size: 16px"> ${cost}</span> ${productsArray[id].currency}</a>
+                  <a href="product-info.html" class="btn btn-primary">Por <span style="font-family:Arial, Times, serif; font-size: 16px"> ${cost}</span> ${productsArray[id].currency}</a>
                 </div>
               </div>
               `
