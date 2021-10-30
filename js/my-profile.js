@@ -145,9 +145,7 @@ function saveProfile() {
     var byear = document.getElementById("year").value;
     profile.age = calculateAge(bday, bmonth, byear);
 
-    localStorage.setItem(
-      "userProfile_" + userLogin.user,
-      JSON.stringify(profile)
+    localStorage.setItem("userProfile_" + userLogin.user, JSON.stringify(profile)
     );
     document.getElementById("confirmation").classList.add("show");
   }
