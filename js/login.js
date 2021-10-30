@@ -14,11 +14,11 @@ document.addEventListener("DOMContentLoaded", function(e){
 
 function log(){
     let usuario = {};
-    usuario.nombre = document.getElementById("email").value.trim();
+    usuario.user = document.getElementById("user").value.trim();
     usuario.pwd = document.getElementById("pass").value.trim();
     if(usuario.pwd=="" || usuario.correo==""){
         if(usuario.correo==""){
-            document.getElementById("email-input").setAttribute("style","border-color:red");
+            document.getElementById("user-input").setAttribute("style","border-color:red");
             document.getElementById("check-email").removeAttribute('hidden');
         }else{
             document.getElementById("pass-input").setAttribute("style","border-color:red");

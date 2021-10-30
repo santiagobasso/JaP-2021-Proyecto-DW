@@ -94,15 +94,24 @@ function navbar(){
         <li class="nav-item" style="padding-left: 3%;">
           <a class="nav-link" href="sell.html">Vender</a>
         </li>
-        <li class="dropdown" id="dropdownUser" style="list-style:none;float:right; padding-left: 3%;">
-          <button id="UserDropdown" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          ${user.nombre}
+        <li class="dropdown" id="dropdownUser" style="list-style:none;float:right; padding-left: 3%;">`
+        if(user == null || user == undefined){
+          htmlContentToAppend +=`<button id="UserDropdown" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Invitado
+          </button>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item" href="login.html">Iniciar Sesion</a>
+            </ul>`
+        }else{
+          htmlContentToAppend += `<button id="UserDropdown" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          ${user.user}
           </button>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
               <a class="dropdown-item" href="my-profile.html">Perfil</a>
               <a class="dropdown-item" href="cart.html">Carrito</a>
               <a class="dropdown-item" id="logout" href="logout.html">Cerrar sesión</a>
-            </ul>
+        `}
+htmlContentToAppend +=`  </ul>
         </li>
       </ul>
     </div>

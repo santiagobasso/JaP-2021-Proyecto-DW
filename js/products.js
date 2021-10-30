@@ -64,33 +64,28 @@ function showProductsList() {
             if (((minPrice == undefined) || (minPrice != undefined && parseInt(product.cost) >= minPrice)) &&
                 ((maxPrice == undefined) || (maxPrice != undefined && parseInt(product.cost) <= maxPrice))) {
                 htmlContentToAppend += `
-                    <a href="product-info.html" class="list-group-item list-group-item-action">
-                        <div class="row">
-                            <div class="col-3">
-                                <img src=" ${product.imgSrc} " alt=" ${product.name} " class="img-thumbnail">
-                            </div>
-                            <div class="col">
-                                <div class="d-flex w-100 justify-content-between">
-                                    <h4 class="mb-1"> ${product.name} </h4>
-                                    <small class="text-muted"> ${product.soldCount} vendidos</small>
-                                 </div>
-                                <p class="mb-1"> ${product.description} </p>
-                                 <br>
-                                <p> <b>Precio:</b> <span style="font-family: Arial">${price}</span>  ${product.currency}</p>
-                            </div>
-                        </div>
+            <div class="col-md-4">
+               <div class="card mb-4 shadow-sm">
+                <a href="product-info.html" class="list-group-item-action" style="width: auto">
+                  <img class="card-img-top" src="${product.imgSrc}" style="object-fit: contain">
+                  <div class="card-body">
+                    <h4 class="mb-1"> ${product.name} </h4>
+                    <p class="card-text" style="height: 5rem; overflow: hidden">${product.description}</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <p> <b>Precio:</b> <span style="font-family: Arial">${price}</span>  ${product.currency}</p>
+                      <small class="text-muted">${product.soldCount} vendidos</small>
+                      </div>
                     </div>
+                  </div>
+               </div>
+            </div>
                      `
-
-
             }
         }
         document.getElementById("prod-list-container").innerHTML = htmlContentToAppend;
     }
-
     hideSpinner();
 }
-
 function sortAndShowProducts(sortCriteria, proArray) {
     currentSortCriteria = sortCriteria;
 

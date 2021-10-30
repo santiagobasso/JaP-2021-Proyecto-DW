@@ -162,7 +162,7 @@ function showRelatedProducts() {
         const cost = Intl.NumberFormat().format(productsArray[id].cost);
         document.getElementById("related-products").innerHTML += `
               <div class="card" style="width: 18rem;">
-                <img src="${productsArray[id].imgSrc}" class="card-img-top" alt="${productsArray[id].name}">
+                <img src="${productsArray[id].imgSrc}" class="card-img-top" alt="${productsArray[id].name}" style="object-fit: flex">
                 <div class="card-body">
                   <h5 class="card-title">${productsArray[id].name}</h5>
                   <p class="card-text" style="height: 80px;">${productsArray[id].description}</p>  

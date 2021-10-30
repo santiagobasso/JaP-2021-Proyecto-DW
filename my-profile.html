@@ -36,13 +36,77 @@
 <body>
   <div id="navigationBar">
   </div>
-  <div class="container p-5">
-    <div class="alert alert-danger" role="alert" style="position: relative; width:auto; top: 0;">
-      <h4 class="alert-heading">¡A trabajar! :)</h4>
-      <p>Esta sección corresponde a: Entrega 6 (Fecha de entrega: 31/10/2021).</p>
-      <hr>
-      <p class="mb-0">Para saber qué debes hacer, fijate en la actividad en CREA correspondiente a esta entrega.</p>
+  <div class="container p-5 d-flex justify-content-center">
+    <div class="row container-info pb-5 pt-3 d-flex justify-content-around">
+      <div class="col-lg-5">
+        <div class="form-group d-flex justify-content-center">
+          <img src="img/img_avatar.jpg" id="img-profile" class="img-profile" alt="">
+        </div>
+        <div class="form-group d-flex justify-content-center flex-wrap">
+          <div class="row ml-1 text-center">
+            <h5> <b> Eliga su foto de perfil:</b></h5>
+            <div class="col-12 mb-2"></div>
+            <input type="file" id="fileInput" accept="image/*" onchange="previewProfilePic()">
+            <div class="col-12 mt-3"></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <form method="post">
+          <div class="form-group">
+            <label for="firstNames">Nombres:</label>
+            <input type="text" class="form-control" id="firstNames" placeholder="Ingrese sus nombres" required
+              pattern="[a-zA-Z]{1,}" />
+            <span class="invalid-feedback">Campo inválido.</span>
+          </div>
+          <div class="form-group">
+            <label for="lastNames">Apellidos:</label>
+            <input type="text" class="form-control" id="lastNames" placeholder="Ingrese sus apellidos" required
+              pattern="[a-zA-Z]{1,}" />
+            <span class="invalid-feedback">Campo inválido.</span>
+          </div>
+          <div class="form-group">
+            <label for="date">Fecha de nacimiento</label><br>
+            <div style="float:left;margin-right:20px;">
+              <label for="day" style="display:block">dia:</label>
+              <select name="day" class="form-control" id="day"
+                style="font-family: Arial, Helvetica, sans-serif;"></select>
+            </div>
+            <div style="float:left;margin-right:20px;">
+              <label for="month" style="display: block;">mes:</label>
+              <select name="month" class="form-control" id="month"
+                style="font-family: Arial, Helvetica, sans-serif;"></select>
+            </div>
+            <div style="float: left;">
+              <label for="year" style="display: block;">año:</label>
+              <select name="year" class="form-control" id="year" style="font-family: Arial, Helvetica, sans-serif;"
+                formnovalidate></select>
+            </div>
+          </div>
+          <div class="form-group">
+            <br><br><br>
+            <label for="email">Email:</label>
+            <input type="email" class="form-control" id="email" placeholder="Ingrese su email"
+              pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required />
+            <span class="invalid-feedback">Campo inválido.</span>
+          </div>
+          <div class="form-group">
+            <label for="phoneNumber">Número de teléfono:</label>
+            <input type="number" class="form-control" id="phoneNumber" placeholder="Ingrese su número de teléfono"
+              pattern="[0-9]" style="font-family: Arial, Helvetica, sans-serif;" required />
+            <span class="invalid-feedback">Campo inválido.</span>
+          </div>
+          <input type="submit" id="saveChanges" class="btn btn-dark col-12" value="Guardar cambios">
+          <span class="valid-feedback">Campo inválido.</span>
+        </form>
+      </div>
     </div>
+  </div>
+  <div class="alert alert-success alert-dismissible fade" id="confirmation" role="alert">
+    <strong>Sus datos han sido actualizados!</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
   </div>
   <footer class="text-muted bg-light">
     <div class="container">
@@ -50,12 +114,6 @@
       <p>Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la letra del obligatorio.</p>
     </div>
   </footer>
-  <div class="alert fade alert-success" role="alert" id="alertResult">
-    <span id="resultSpan"></span>
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
   <div id="spinner-wrapper">
     <div class="lds-ring">
       <div></div>

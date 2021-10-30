@@ -286,3 +286,27 @@ div.cart-info > img{
   margin-right: 10px;
   object-fit: contain;
 }
+
+/* AVATAR STYLE */
+
+.img-profile {
+  border-radius: 50% 50% 50% 50%;
+  height: 200px;
+  width: 200px;
+  object-fit: cover;
+}
+
+/* PHONE INPUT */
+
+#phoneNumber::-webkit-outer-spin-button,
+#phoneNumber::-webkit-inner-spin-button{
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* DATE NO VALIDATION */
+#day:valid,#month:valid,#year:valid {
+  border-color: #ced4da;
+  padding-right: .75rem;
+  background: none;
+}
