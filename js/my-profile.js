@@ -147,7 +147,12 @@ function saveProfile() {
 
     localStorage.setItem("userProfile_" + userLogin.user, JSON.stringify(profile)
     );
-    document.getElementById("confirmation").classList.add("show");
+    document.getElementById("confirmation").innerHTML = `<div class="alert alert-success alert-dismissible fade show" id="confirmation" role="alert">
+                                                          <strong>Sus datos han sido actualizados!</strong>
+                                                          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                          </button>
+                                                        </div>`
   }
 }
 
