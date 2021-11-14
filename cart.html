@@ -11,6 +11,7 @@
 
   <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/album/">
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+  <link rel="stylesheet" href="css/countrySelect.css">
 
   <style>
     .bd-placeholder-img {
@@ -32,6 +33,7 @@
   <link href="css/styles.css" rel="stylesheet">
   <link href="css/dropzone.css" rel="stylesheet">
   <link href="css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/card-js.min.css">
 </head>
 
 <body>
@@ -42,20 +44,46 @@
       <div id="product-container">
       </div>
       <hr class="mb-4">
-      <h5 class="mb-3">Tipo de envio</h5>
+      <h5 class="mb-3">Envio</h5>
       <div class="d-block my-3" onchange="showCart(cart)">
         <div class="custom-control custom-radio">
-          <input id="deliveryEstandar" name="deliveryType" type="radio" class="custom-control-input" checked="" required="">
+          <input id="deliveryEstandar" name="deliveryType" type="radio" class="custom-control-input" checked>
           <label class="custom-control-label" for="deliveryEstandar">5% Estándar (12-15 dias)</label>
         </div>
         <div class="custom-control custom-radio">
-          <input id="deliveryExpress" name="deliveryType" type="radio" class="custom-control-input" required="">
+          <input id="deliveryExpress" name="deliveryType" type="radio" class="custom-control-input">
           <label class="custom-control-label" for="deliveryExpress">7% Express (5-8 Dias)</label>
         </div>
         <div class="custom-control custom-radio">
-          <input id="deliveryPremium" name="deliveryType" type="radio" class="custom-control-input" required="">
+          <input id="deliveryPremium" name="deliveryType" type="radio" class="custom-control-input">
           <label class="custom-control-label" for="deliveryPremium">15% Premium (2-5 Dias)</label>
         </div>
+        <br>
+        <form action="post" id="form1">
+          <div class="form-group row">
+            <label for="address" class="col-sm-2 col-form-label">Direccion</label>
+            <div class="col-sm-2">
+              <input id="street" name="street" type="text" class="form-control was-validated" placeholder="Calle"
+                required>
+            </div>
+            <div class="col-sm-2">
+              <input id="door" name="door" type="text" class="form-control was-validated" placeholder="Numero" required>
+            </div>
+            <div class="col-sm-2">
+              <input id="corner" name="corner" type="text" class="form-control was-validated" placeholder="Esquina"
+                required>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="country" class="col-sm-2 col-form-label">Pais</label>
+            <div class="col-sm-2">
+              <div class="form-item">
+                <input id="country" type="text" class="form-control">
+                <label for="country" style="display:none;">Select a country here...</label>
+              </div>
+            </div>
+          </div>
+        </form>
       </div>
       <hr class="mb-4">
       <h5 class="mb-3">Moneda</h5>
@@ -91,7 +119,51 @@
           <strong id="totalCost"></strong>
         </li>
       </ul>
-      <button type="submit" id="confirmPayment" class="btn btn-success col-12" style="margin-bottom: 40px;"> Confirmar pedido</button>
+      <button type="submit" id="confirmPayment" class="btn btn-primary col-12" style="margin-bottom: 40px;"> Elegir
+        metodo de pago</button>
+    </div>
+    <div class="modal fade" id="paymentModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Metodo de pago</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="custom-control custom-radio">
+            <input id="creditCard" name="paymentType" type="radio" class="custom-control-input"
+              onclick="enableInputs()">
+            <label class="custom-control-label" for="creditCard" style="margin-left: 3%; margin-top: 3%;">Tarjeta de
+              Credito</label>
+          </div>
+          <form method="post" id="form2">
+          <div class="modal-body card-js" id="divCreditCardInfo">
+              <input class="card-number my-custom-class" name="card-number" id="creditCardInput1" disabled required>
+              <input class="expiry-month" name="expiry-month" id="creditCardInput2" disabled required>
+              <input class="expiry-year" name="expiry-year" id="creditCardInput3" disabled required>
+              <input class="cvc" name="cvc" id="creditCardInput4" disabled required>
+          </div>
+        </form>
+          <div class="custom-control custom-radio">
+            <input id="bankTransfer" name="paymentType" type="radio" class="custom-control-input"
+              onclick="enableInputs()">
+            <label class="custom-control-label" for="bankTransfer" style="margin-left: 3%;">Transferencia
+              Bancaria</label>
+          </div>
+          <div class="modal-body" id="divBankTransferInfo">
+            <form method="post" id="form3">
+              <input name="card-number" id="bankAccountInput1" disabled required>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-secondary" data-dismiss="modal" aria-label="Close">Cancelar</button>
+            <button type="submit" onclick="confirmPayment()" class="btn btn-primary" id="confimationButton" disabled>Confirmar Pedido</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="confirmation">
     </div>
     <div id="spinner-wrapper">
       <div class="lds-ring">
@@ -102,11 +174,21 @@
       </div>
     </div>
 
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="js/jquery-3.4.1.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/dropzone.js"></script>
     <script src="js/init.js"></script>
     <script src="js/cart.js"></script>
+    <script src="js/countrySelect.min.js"></script>
+    <script src="js/card-js.min.js"></script>
+    <script>
+      $("#country").countrySelect({
+        defaultCountry: "uy",
+        responsiveDropdown: true,
+        preferredCountries: ['uy', 'br', 'ar']
+      });
+    </script>
 </body>
 
 </html>

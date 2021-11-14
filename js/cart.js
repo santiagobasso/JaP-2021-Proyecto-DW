@@ -10,7 +10,15 @@ document.addEventListener("DOMContentLoaded", function (e) {
       cart = resultObj.data.articles;
       showCart(cart);
     }
-  });    
+  });
+  document
+    .getElementById("confirmPayment")
+    .addEventListener("click", function () {
+      document.getElementsByTagName("form")[0].classList.add("was-validated");
+      if (document.getElementsByTagName("form")[0].checkValidity() === true) {
+        $("#paymentModal").modal("show");
+      }
+    });
 });
 
 function showCart(cart) {
@@ -31,12 +39,18 @@ function showCart(cart) {
                     <img src="${product.src}" alt="${product.src}">
                     <div>
                         <p>${product.name}</p>
-                        <small style="font-family:Arial;">P/Unitario: ${product.currency} ${Intl.NumberFormat().format(product.unitCost)}</small>
+                        <small style="font-family:Arial;">P/Unitario: ${
+                          product.currency
+                        } ${Intl.NumberFormat().format(
+      product.unitCost
+    )}</small>
                     </div>
                 </div>
             </td>
             <td>
-                <input class="quantity" onchange="update(this.dataset.iden, value)" type="number" data-iden="${i}" min="1" value=${product.count}>
+                <input class="quantity" onchange="update(this.dataset.iden, value)" type="number" data-iden="${i}" min="1" value=${
+      product.count
+    }>
             </td>
             <td style="width: 40px;">
                 ${product.currency} 
@@ -92,17 +106,71 @@ function calculateTotal(cart) {
     deliveryCost = subtotal * 0.15;
   }
   total = subtotal + deliveryCost;
-  document.getElementById("subtotalCost").innerHTML = `${Intl.NumberFormat().format(subtotal)} ${selectedCurrency}`;
-  document.getElementById("deliveryCost").innerHTML = `${Intl.NumberFormat().format(deliveryCost)} ${selectedCurrency} `;
-  document.getElementById("totalCost").innerHTML = `${Intl.NumberFormat().format(total)} ${selectedCurrency} `;
+  document.getElementById("subtotalCost").innerHTML = `${Intl.NumberFormat(
+    "es-UY",
+    { style: "currency", currency: selectedCurrency }
+  ).format(subtotal)}`;
+  document.getElementById("deliveryCost").innerHTML = `${Intl.NumberFormat(
+    "es-UY",
+    { style: "currency", currency: selectedCurrency }
+  ).format(deliveryCost)}`;
+  document.getElementById("totalCost").innerHTML = `${Intl.NumberFormat(
+    "es-UY",
+    { style: "currency", currency: selectedCurrency }
+  ).format(total)}`;
 }
 
-function update(id, cant){
-    cart[id].count = cant;
-    showCart(cart);
-}
-
-function dropItem(i){
-  cart.splice(i,1);
+function update(id, cant) {
+  cart[id].count = cant;
   showCart(cart);
+}
+
+function dropItem(i) {
+  cart.splice(i, 1);
+  showCart(cart);
+}
+
+function enableInputs() {
+  if (document.getElementsByName("paymentType")[0].checked) {
+    document.getElementById("creditCardInput1").disabled = false;
+    document.getElementById("MonthYear").disabled = false;
+    document.getElementById("creditCardInput4").disabled = false;
+    document.getElementById("bankAccountInput1").disabled = true;
+    document.getElementById("confimationButton").disabled = false;
+  } else {
+    document.getElementById("creditCardInput1").disabled = true;
+    document.getElementById("MonthYear").disabled = true;
+    document.getElementById("creditCardInput4").disabled = true;
+    document.getElementById("bankAccountInput1").disabled = false;
+    document.getElementById("confimationButton").disabled = false;
+  }
+}
+
+function confirmPayment() {
+  console.log(document.getElementsByTagName("form"));
+  if (document.getElementsByName("paymentType")[0].checked) {
+    document.getElementsByTagName("form")[1].classList.add("was-validated");
+    if (document.getElementsByTagName("form")[1].checkValidity() === true) {
+      confirmMessage();
+    }else{
+      alert("Llene los campos correctamente");
+    }
+  }else{
+    document.getElementsByTagName("form")[2].classList.add("was-validated");
+    if (document.getElementsByTagName("form")[2].checkValidity() === true) {
+      confirmMessage();
+    }else{
+      alert("Llene los campos correctamente");
+    }
+  }
+}
+
+function confirmMessage(){
+  $("#paymentModal").modal("hide");
+      document.getElementById("confirmation").innerHTML = `<div class="alert alert-success alert-dismissible fade show" id="confirmation" role="alert">
+                                                            <strong>Sus compra a sido realizada!</strong>
+                                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                              <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                          </div>`;
 }
