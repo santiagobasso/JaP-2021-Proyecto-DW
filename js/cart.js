@@ -1,21 +1,28 @@
 var cart = [];
 let dollar = 40;
+let buy = {};
+let address ={};
 
 //Función que se ejecuta una vez que se haya lanzado el evento de
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
 document.addEventListener("DOMContentLoaded", function (e) {
-  getJSONData(CART_INFO_URL2).then(function (resultObj) {
+  getJSONData(CART_INFO_URL).then(function (resultObj) {
     if (resultObj.status === "ok") {
       cart = resultObj.data.articles;
       showCart(cart);
     }
   });
-  document
-    .getElementById("confirmPayment")
-    .addEventListener("click", function () {
+  document.getElementById("confirmPayment").addEventListener("click", function () {
       document.getElementsByTagName("form")[0].classList.add("was-validated");
       if (document.getElementsByTagName("form")[0].checkValidity() === true) {
+        //Cargo DATOS A LA COMPRA
+        address.street = document.getElementById("street").value;
+        address.door = document.getElementById("door").value;
+        address.corner = document.getElementById("corner").value;
+        address.country = document.getElementById("country").value;
+        buy.address = address;
+        buy.items = cart;
         $("#paymentModal").modal("show");
       }
     });
@@ -73,6 +80,7 @@ function showCart(cart) {
 function calculateTotal(cart) {
   var subtotal = 0;
   var deliveryCost = 0;
+  var deliveryType = "";
   var total = 0;
   let selectedCurrency = "";
 
@@ -100,24 +108,20 @@ function calculateTotal(cart) {
   }
   if (document.getElementsByName("deliveryType")[0].checked) {
     deliveryCost = subtotal * 0.05;
+    deliveryType= "Estandar";
   } else if (document.getElementsByName("deliveryType")[1].checked) {
     deliveryCost = subtotal * 0.07;
+    deliveryType= "Express";
   } else {
     deliveryCost = subtotal * 0.15;
+    deliveryType= "Premium";
   }
   total = subtotal + deliveryCost;
-  document.getElementById("subtotalCost").innerHTML = `${Intl.NumberFormat(
-    "es-UY",
-    { style: "currency", currency: selectedCurrency }
-  ).format(subtotal)}`;
-  document.getElementById("deliveryCost").innerHTML = `${Intl.NumberFormat(
-    "es-UY",
-    { style: "currency", currency: selectedCurrency }
-  ).format(deliveryCost)}`;
-  document.getElementById("totalCost").innerHTML = `${Intl.NumberFormat(
-    "es-UY",
-    { style: "currency", currency: selectedCurrency }
-  ).format(total)}`;
+  document.getElementById("subtotalCost").innerHTML = `${Intl.NumberFormat("es-UY",{ style: "currency", currency: selectedCurrency }).format(subtotal)}`;
+  document.getElementById("deliveryCost").innerHTML = `${Intl.NumberFormat("es-UY",{ style: "currency", currency: selectedCurrency }).format(deliveryCost)}`;
+  document.getElementById("totalCost").innerHTML = `${Intl.NumberFormat("es-UY",{ style: "currency", currency: selectedCurrency }).format(total)}`;
+  //CARGO DATOS DE COSTE
+  buy.details= { subtotal: subtotal, delivery: deliveryCost, total: total, currency: selectedCurrency, deliveryType: deliveryType};
 }
 
 function update(id, cant) {
@@ -147,10 +151,10 @@ function enableInputs() {
 }
 
 function confirmPayment() {
-  console.log(document.getElementsByTagName("form"));
   if (document.getElementsByName("paymentType")[0].checked) {
     document.getElementsByTagName("form")[1].classList.add("was-validated");
     if (document.getElementsByTagName("form")[1].checkValidity() === true) {
+      buy.paymentDetails={BankAccount: 72}
       confirmMessage();
     }else{
       alert("Llene los campos correctamente");
@@ -166,6 +170,16 @@ function confirmPayment() {
 }
 
 function confirmMessage(){
+
+  // fetch('http://localhost:3000/confirmed_sale', {
+  //   method: 'POST',
+  //   headers: {
+  //       'Content-Type': 'application/json'
+  //   },
+  //   body: JSON.stringify({
+  //         buy      
+  //   })
+  // });
   $("#paymentModal").modal("hide");
       document.getElementById("confirmation").innerHTML = `<div class="alert alert-success alert-dismissible fade show" id="confirmation" role="alert">
                                                             <strong>Sus compra a sido realizada!</strong>

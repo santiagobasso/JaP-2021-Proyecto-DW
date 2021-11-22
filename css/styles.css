@@ -335,3 +335,7 @@ div.cart-info > img{
   background-color: #eee;
   color: #555;
 }
+#country:valid {
+  padding-right: .75rem;
+  background: none;
+}
